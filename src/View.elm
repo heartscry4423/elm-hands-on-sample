@@ -1,11 +1,67 @@
 module View exposing (..)
 
 import Model exposing (Model)
-import Msg exposing (Msg)
-import Html exposing (Html, div)
+import Msg exposing (Msg(..))
+import Html exposing (Html, h2, div, img, text, textarea, button)
+import Html.Attributes exposing (src, value)
+import Html.Events exposing (onClick, onInput)
+import Styles as Styles
+import Member exposing (Member)
+import Talk exposing (Talk)
+import Date
 
 
 view : Model -> Html Msg
 view model =
-    div [] []
+    div [ Styles.mainWrap ]
+        [ viewPostForm model
+        , div [ Styles.talks ]
+            <| List.map (\talk -> viewTalk talk model) model.talks
+        ]
+
+
+viewPostForm : Model -> Html Msg
+viewPostForm model =
+    let
+        myself =
+            Member.memberById model.myselfId model.members
+    in
+    div [ Styles.postForm ]
+        [ div [ Styles.formLeft ]
+            [ img [ Styles.selfImg, src myself.imageUrl ] []
+            , div [ Styles.selfName ] [ text myself.name ]
+            ]
+        , div [ Styles.formRight ]
+            [ textarea [ Styles.formArea, value model.field, onInput ChangeInput ] []
+            , button [ Styles.postButton, onClick Add ] [ text "投稿！" ]
+            ]
+        ]
+
+
+viewTalk : Talk -> Model -> Html Msg
+viewTalk talk model =
+    let
+        member =
+            Member.memberById talk.memberId model.members
+    in
+    div [ Styles.talk ]
+        [ div [ Styles.talkLeft ]
+            [ img [ Styles.posterImg, src <| member.imageUrl ] [] ]
+        , div [ Styles.talkRight ]
+            [ div [ Styles.posterName ] [ text member.name ]
+            , div [ Styles.message ] [ text talk.message ]
+            , div [ Styles.talkFooter ]
+                [ text <| toString <| Date.fromTime talk.createdAt
+                , viewDeleteButton talk model
+                ]
+            ]
+        ]
+
+
+viewDeleteButton : Talk -> Model -> Html Msg
+viewDeleteButton talk model =
+    if model.myselfId == talk.memberId then
+        button [ Styles.deleteButton, onClick <| Delete talk.id ] [ text "削除" ]
+    else
+        div [] []
 

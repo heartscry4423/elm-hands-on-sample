@@ -1,4 +1,7 @@
 module Msg exposing (..)
 
 type Msg
-    = Initial
+    = ChangeInput String
+    | Add
+    | Delete String
+
