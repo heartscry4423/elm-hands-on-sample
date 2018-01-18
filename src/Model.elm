@@ -31,9 +31,9 @@ initialMembers =
 
 initialTalks : List Talk
 initialTalks =
-    [ Talk "t1" "m1" "Yes We Can !" 1000000000000
-    , Talk "t2" "m2" "ちょっと何いってるかわかんないっす" 1000000100000
-    , Talk "t3" "m3" "なんでわかんねえんだよ" 1000000200000
-    , Talk "t4" "m1" "Thank you !" 1000000300000
-    , Talk "t5" "m2" "僕ちゃんとピッザって言いましたよ" 1000000400000
+    [ Talk "t1" "m1" "Yes We Can !" False 1000000000000
+    , Talk "t2" "m2" "ちょっと何いってるかわかんないっす" False 1000000100000
+    , Talk "t3" "m3" "なんでわかんねえんだよ" False 1000000200000
+    , Talk "t4" "m1" "Thank you !" False 1000000300000
+    , Talk "t5" "m2" "僕ちゃんとピッザって言いましたよ" False 1000000400000
     ]

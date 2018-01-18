@@ -20,12 +20,32 @@ update msg model =
         Add ->
             let
                 newTalk =
-                    Talk "t6" model.myselfId model.field 1000000500000
+                    Talk "t6" model.myselfId model.field False 1000000500000
             in
             { model
                 | talks = model.talks ++ [ newTalk ]
                 , field = ""
             } ! []
+
+        Edit id isEditing ->
+            let
+                updateTalk talk =
+                    if talk.id == id then
+                        { talk | isEditing = isEditing }
+                    else
+                        talk
+            in
+            { model | talks = List.map updateTalk model.talks } ! []
+
+        UpdateMessage id text ->
+            let
+                updateTalk talk =
+                    if talk.id == id then
+                        { talk | message = text }
+                    else
+                        talk
+            in
+            { model | talks = List.map updateTalk model.talks } ! []
 
         Delete id ->
             { model | talks = model.talks |> List.filter (\talk -> talk.id /= id) } ! []

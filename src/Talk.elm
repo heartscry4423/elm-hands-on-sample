@@ -6,6 +6,7 @@ type alias Talk =
     { id : String
     , memberId : String
     , message : String
+    , isEditing : Bool
     , createdAt : Time
     }
 
@@ -15,6 +16,7 @@ emptyTalk =
     { id = ""
     , memberId = ""
     , message = ""
+    , isEditing = False
     , createdAt = 0
     }
 

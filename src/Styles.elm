@@ -130,6 +130,14 @@ message =
         ]
 
 
+editingMessage : Attribute msg
+editingMessage =
+    style
+        [ ( "margin-left", "0px" )
+        , ( "width", "500px" )
+        ]
+
+
 talkFooter : Attribute msg
 talkFooter =
     style
@@ -137,7 +145,7 @@ talkFooter =
         ]
 
 
-deleteButton : Attribute msg
-deleteButton =
+buttons : Attribute msg
+buttons =
     style
         [ ("float", "right") ]

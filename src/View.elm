@@ -49,19 +49,29 @@ viewTalk talk model =
             [ img [ Styles.posterImg, src <| member.imageUrl ] [] ]
         , div [ Styles.talkRight ]
             [ div [ Styles.posterName ] [ text member.name ]
-            , div [ Styles.message ] [ text talk.message ]
+            , viewMessage talk
             , div [ Styles.talkFooter ]
                 [ text <| toString <| Date.fromTime talk.createdAt
-                , viewDeleteButton talk model
+                , viewButtons talk model
                 ]
             ]
         ]
 
 
-viewDeleteButton : Talk -> Model -> Html Msg
-viewDeleteButton talk model =
+viewMessage : Talk -> Html Msg
+viewMessage talk =
+    if talk.isEditing then
+        textarea [ Styles.editingMessage, value talk.message, onInput <| UpdateMessage talk.id ] []
+    else
+    div [ Styles.message ] [ text talk.message ]
+
+
+viewButtons : Talk -> Model -> Html Msg
+viewButtons talk model =
     if model.myselfId == talk.memberId then
-        button [ Styles.deleteButton, onClick <| Delete talk.id ] [ text "削除" ]
+        div [ Styles.buttons ]
+            [ button [ onClick <| Edit talk.id ( not talk.isEditing ) ] [ text "編集" ]
+            , button [ onClick <| Delete talk.id ] [ text "削除" ]
+            ]
     else
         div [] []
-
