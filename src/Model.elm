@@ -9,6 +9,7 @@ type alias Model =
     , members : List Member
     , talks : List Talk
     , field : String
+    , nextTalkIdNum : Int
     }
 
 
@@ -18,6 +19,7 @@ initialModel =
     , members = initialMembers
     , talks = initialTalks
     , field = ""
+    , nextTalkIdNum = 6
     }
 
 

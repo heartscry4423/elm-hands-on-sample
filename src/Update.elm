@@ -19,12 +19,16 @@ update msg model =
 
         Add ->
             let
+                nextTalkId =
+                    "t" ++ toString model.nextTalkIdNum
+
                 newTalk =
-                    Talk "t6" model.myselfId model.field False 1000000500000
+                    Talk nextTalkId model.myselfId model.field False 1000000500000
             in
             { model
                 | talks = model.talks ++ [ newTalk ]
                 , field = ""
+                , nextTalkIdNum = model.nextTalkIdNum + 1
             } ! []
 
         Edit id isEditing ->
