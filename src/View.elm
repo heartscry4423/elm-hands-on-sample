@@ -8,7 +8,7 @@ import Html.Events exposing (onClick, onInput)
 import Styles as Styles
 import Member exposing (Member)
 import Talk exposing (Talk)
-import Date
+import ExDate
 
 
 view : Model -> Html Msg
@@ -51,7 +51,7 @@ viewTalk talk model =
             [ div [ Styles.posterName ] [ text member.name ]
             , viewMessage talk
             , div [ Styles.talkFooter ]
-                [ text <| toString <| Date.fromTime talk.createdAt
+                [ text <| ExDate.formatYmdms talk.createdAt
                 , viewButtons talk model
                 ]
             ]
