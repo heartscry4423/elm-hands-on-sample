@@ -4,6 +4,8 @@ import Model exposing (Model, initialModel)
 import Msg exposing (Msg(..))
 import Talk exposing (Talk)
 import Date
+import Time
+import Task
 
 
 init : ( Model, Cmd Msg )
@@ -17,13 +19,16 @@ update msg model =
         ChangeInput text ->
             { model | field = text } ! []
 
-        Add ->
+        MightAdd ->
+            model ! [ Task.perform Add Time.now ]
+
+        Add time ->
             let
                 nextTalkId =
                     "t" ++ toString model.nextTalkIdNum
 
                 newTalk =
-                    Talk nextTalkId model.myselfId model.field False 1000000500000
+                    Talk nextTalkId model.myselfId model.field False time
             in
             { model
                 | talks = model.talks ++ [ newTalk ]

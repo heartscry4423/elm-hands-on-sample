@@ -1,8 +1,11 @@
 module Msg exposing (..)
 
+import Time exposing (Time)
+
 type Msg
     = ChangeInput String
-    | Add
+    | MightAdd
+    | Add Time
     | Edit String Bool
     | UpdateMessage String String
     | Delete String

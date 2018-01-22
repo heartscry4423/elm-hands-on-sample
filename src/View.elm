@@ -33,7 +33,7 @@ viewPostForm model =
             ]
         , div [ Styles.formRight ]
             [ textarea [ Styles.formArea, value model.field, onInput ChangeInput ] []
-            , button [ Styles.postButton, onClick Add ] [ text "投稿！" ]
+            , button [ Styles.postButton, onClick MightAdd ] [ text "投稿！" ]
             ]
         ]
 
