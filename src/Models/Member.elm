@@ -1,4 +1,4 @@
-module Member exposing (..)
+module Models.Member exposing (..)
 
 type alias Member =
     { id : String

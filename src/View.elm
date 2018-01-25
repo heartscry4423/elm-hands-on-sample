@@ -6,9 +6,9 @@ import Html exposing (Html, h2, div, img, text, textarea, button)
 import Html.Attributes exposing (src, value)
 import Html.Events exposing (onClick, onInput)
 import Styles as Styles
-import Member exposing (Member)
-import Talk exposing (Talk)
-import ExDate
+import Models.Member as Member exposing (Member)
+import Models.Talk exposing (Talk)
+import Utils.Date as ExDate
 
 
 view : Model -> Html Msg
@@ -29,7 +29,6 @@ viewPostForm model =
     div [ Styles.postForm ]
         [ div [ Styles.formLeft ]
             [ img [ Styles.selfImg, src myself.imageUrl ] []
-            , div [ Styles.selfName ] [ text myself.name ]
             ]
         , div [ Styles.formRight ]
             [ textarea [ Styles.formArea, value model.field, onInput ChangeInput ] []
@@ -63,15 +62,22 @@ viewMessage talk =
     if talk.isEditing then
         textarea [ Styles.editingMessage, value talk.message, onInput <| UpdateMessage talk.id ] []
     else
-    div [ Styles.message ] [ text talk.message ]
+        div [ Styles.message ] [ text talk.message ]
 
 
 viewButtons : Talk -> Model -> Html Msg
 viewButtons talk model =
+    let
+        editButtonText =
+            if talk.isEditing then
+                "完了"
+            else
+                "編集"
+    in
     if model.myselfId == talk.memberId then
         div [ Styles.buttons ]
-            [ button [ onClick <| Edit talk.id ( not talk.isEditing ) ] [ text "編集" ]
-            , button [ onClick <| Delete talk.id ] [ text "削除" ]
+            [ button [ Styles.editButton, onClick <| Edit talk.id ( not talk.isEditing ) ] [ text editButtonText ]
+            , button [ Styles.deleteButton, onClick <| Delete talk.id ] [ text "削除" ]
             ]
     else
         div [] []

@@ -9,4 +9,3 @@ type Msg
     | Edit String Bool
     | UpdateMessage String String
     | Delete String
-

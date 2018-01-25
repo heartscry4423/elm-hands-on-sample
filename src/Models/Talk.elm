@@ -1,4 +1,4 @@
-module Talk exposing (..)
+module Models.Talk exposing (..)
 
 import Time exposing (Time)
 
@@ -21,8 +21,11 @@ emptyTalk =
     }
 
 
-talkById : String -> List Talk -> Talk
-talkById id =
-    List.filter (\talk -> talk.id == id)
-        >> List.head
-        >> Maybe.withDefault emptyTalk
+updateMessage : String -> Talk -> Talk
+updateMessage message talk =
+    { talk | message = message }
+
+
+updateIsEditing : Bool -> Talk -> Talk
+updateIsEditing isEditing talk =
+    { talk | isEditing = isEditing }

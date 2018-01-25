@@ -1,7 +1,7 @@
 module Model exposing (..)
 
-import Member exposing (Member)
-import Talk exposing (Talk)
+import Models.Member exposing (Member)
+import Models.Talk exposing (Talk)
 
 
 type alias Model =

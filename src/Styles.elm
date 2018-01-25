@@ -17,8 +17,8 @@ mainWrap =
 postForm : Attribute msg
 postForm =
     style
-        [ ( "height", "100px" )
-        , ( "border-bottom", "solid 1px" )
+        [ ( "min-height", "120px" )
+        , ( "border-bottom", "solid 2px #c4c4c4" )
         ]
 
 
@@ -40,13 +40,6 @@ selfImg =
         ]
 
 
-selfName : Attribute msg
-selfName =
-    style
-        [ ( "font-size", "14px" )
-        ]
-
-
 formRight : Attribute msg
 formRight =
     style
@@ -59,6 +52,9 @@ formArea =
     style
         [ ( "margin-top", "8px" )
         , ( "width", "500px" )
+        , ( "height", "48px" )
+        , ( "resize", "none" )
+        , ( "border", "solid 2px #c4c4c4" )
         ]
 
 
@@ -67,6 +63,8 @@ postButton =
     style
         [ ( "margin-top", "8px" )
         , ( "margin-right", "16px" )
+        , ( "width", "84px" )
+        , ( "height", "28px" )
         , ( "float", "right" )
         ]
 
@@ -81,16 +79,16 @@ talks =
 talk : Attribute msg
 talk =
     style
-        [ ( "min-height", "140px" )
-        , ( "border-bottom", "solid 1px" )
+        [ ( "min-height", "120px" )
+        , ( "margin-top", "20px" )
+        , ( "border-bottom", "solid 1px #c4c4c4" )
         ]
 
 
 talkLeft : Attribute msg
 talkLeft =
     style
-        [ ( "padding-top", "12px" )
-        , ( "padding-left", "12px" )
+        [ ( "padding-left", "12px" )
         , ( "padding-right", "12px" )
         , ( "height", "120px" )
         , ( "float", "left" )
@@ -108,8 +106,7 @@ posterImg =
 talkRight : Attribute msg
 talkRight =
     style
-        [ ( "padding-top", "12px" )
-        , ( "padding-left", "12px" )
+        [ ( "padding-left", "12px" )
         , ( "padding-right", "12px" )
         ]
 
@@ -135,6 +132,8 @@ editingMessage =
     style
         [ ( "margin-left", "0px" )
         , ( "width", "500px" )
+        , ( "height", "28px" )
+        , ( "resize", "none" )
         ]
 
 
@@ -142,6 +141,7 @@ talkFooter : Attribute msg
 talkFooter =
     style
         [ ( "font-size", "12px" )
+        , ( "margin-top", "8px" )
         ]
 
 
@@ -149,3 +149,15 @@ buttons : Attribute msg
 buttons =
     style
         [ ("float", "right") ]
+
+
+editButton : Attribute msg
+editButton =
+    style
+        [ ("margin-right", "8px") ]
+
+
+deleteButton : Attribute msg
+deleteButton =
+    style
+        []

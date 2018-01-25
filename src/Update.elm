@@ -2,7 +2,7 @@ module Update exposing (..)
 
 import Model exposing (Model, initialModel)
 import Msg exposing (Msg(..))
-import Talk exposing (Talk)
+import Models.Talk as Talk exposing (Talk)
 import Date
 import Time
 import Task
@@ -40,7 +40,7 @@ update msg model =
             let
                 updateTalk talk =
                     if talk.id == id then
-                        { talk | isEditing = isEditing }
+                        Talk.updateIsEditing isEditing talk
                     else
                         talk
             in
@@ -50,7 +50,7 @@ update msg model =
             let
                 updateTalk talk =
                     if talk.id == id then
-                        { talk | message = text }
+                        Talk.updateMessage text talk
                     else
                         talk
             in
@@ -58,4 +58,3 @@ update msg model =
 
         Delete id ->
             { model | talks = model.talks |> List.filter (\talk -> talk.id /= id) } ! []
-

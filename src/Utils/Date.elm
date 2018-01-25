@@ -1,4 +1,4 @@
-module ExDate exposing (..)
+module Utils.Date exposing (..)
 
 import Time exposing (..)
 import Date exposing (..)
