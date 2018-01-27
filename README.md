@@ -1,7 +1,7 @@
 ## Start
 
 ```
-$ cd elm-handson180127
+$ cd elm-hands-on-sample
 $ elm-reactor
 ```
 
