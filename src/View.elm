@@ -2,13 +2,14 @@ module View exposing (..)
 
 import Model exposing (Model)
 import Msg exposing (Msg(..))
-import Html exposing (Html, h2, div, img, text, textarea, button)
+import Html exposing (Html, h2, div, img, text, textarea, button, Attribute)
 import Html.Attributes exposing (src, value)
-import Html.Events exposing (onClick, onInput)
+import Html.Events exposing (onClick, onInput, on, keyCode)
 import Styles as Styles
 import Models.Member as Member exposing (Member)
 import Models.Talk exposing (Talk)
 import Utils.Date as ExDate
+import Json.Decode as Json
 
 
 view : Model -> Html Msg
@@ -60,9 +61,21 @@ viewTalk talk model =
 viewMessage : Talk -> Html Msg
 viewMessage talk =
     if talk.isEditing then
-        textarea [ Styles.editingMessage, value talk.message, onInput <| UpdateMessage talk.id ] []
+        textarea [ Styles.editingMessage, value talk.message, onInput <| UpdateMessage talk.id, onEnter <| Edit talk.id False ] []
     else
         div [ Styles.message ] [ text talk.message ]
+
+
+onEnter : msg -> Attribute msg
+onEnter msg =
+    let
+        msgIfEnter key =
+            if key == 13 then
+                Json.succeed msg
+            else
+                Json.fail "not enter"
+    in
+    on "keydown" (Json.andThen msgIfEnter keyCode)
 
 
 viewButtons : Talk -> Model -> Html Msg
